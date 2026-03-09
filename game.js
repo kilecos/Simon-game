@@ -6,6 +6,17 @@ let level = 0;               // On défini le niveau à l'ouverture de la page q
 let endGame = false;         // On défini une variable pour bloquer les clics pendant l'animation de fin pour ne pas relancer tout de suite si le joueur clique plusieurs fois d'affilée
 let bestScore = localStorage.getItem("simonBestScore") || 0;  // On défini le meilleur score du joueur s'il y en a un
 
+const sounds = {
+    red:    new Howl({ src: ["./sounds/red.mp3"],    volume: 0.15 }),
+    blue:   new Howl({ src: ["./sounds/blue.mp3"],   volume: 0.15 }),
+    green:  new Howl({ src: ["./sounds/green.mp3"],  volume: 0.15 }),
+    yellow: new Howl({ src: ["./sounds/yellow.mp3"], volume: 0.15 }),
+    wrong:  new Howl({ src: ["./sounds/wrong.mp3"],  volume: 0.15 })
+};
+
+function playSound(name) {
+    sounds[name].play();
+}
 
 $("#best-score").text("Best Score : Level " + bestScore);  // On met à jour le texte selon le meilleur score du joueur
 
@@ -163,16 +174,6 @@ function nextSequence() {
     $("#" + randomChosenColor).fadeIn(100).fadeOut(100).fadeIn(100);  // On met une animation pour bien distinguer la couleur choisie par le jeu
 
     playSound(randomChosenColor);  // On joue le son correspondant à la couleur choisie par le jeu
-
-}
-
-// Définition de la fonction afin de jouer les sons propres à chaque boutons
-function playSound(name) {
-
-    let audio = new Audio("./sounds/" + name + ".mp3");  // On va chercher le fichier audio à jouer correspondant à la couleur choisie
-    audio.volume = 0.15;         // On ajuste le volume de l'audio
-    audio.play().catch(() => {});                // On joue le son sélectionné
-    
 
 }
 
