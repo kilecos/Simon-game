@@ -118,13 +118,9 @@ function checkAnswer(currentLevel) {
             localStorage.setItem("simonBestScore", bestScore);         // On enregistre ce nouveau meilleur score
             $("#best-score").text("New Record ! Level " + bestScore);  // On annonce au joueur qu'il a battu son record
         }
-
-        if ('ontouchstart' in window) {
-            $("#level-title").text("Game Over !");     // On affiche le message de game over
-        } else {
-            $("#level-title").text("Game Over !");    
-        }
-
+ 
+        $("#level-title").text("Game Over !");     // On affiche le message de game over
+        
         // On défini la durée de blocage (1s) avant de pouvoir relancer le jeu
         setTimeout(function() {
             if ('ontouchstart' in window) {
@@ -185,5 +181,6 @@ function animatePress(currentColour) {
     setTimeout(function() {
         $("#" + currentColour).removeClass("pressed");    // On retire la classe "pressed" après un délai de 100ms 
     }, 100);
+
 
 }
