@@ -6,6 +6,8 @@ let level = 0;               // On défini le niveau à l'ouverture de la page q
 let endGame = false;         // On défini une variable pour bloquer les clics pendant l'animation de fin pour ne pas relancer tout de suite si le joueur clique plusieurs fois d'affilée
 let bestScore = localStorage.getItem("simonBestScore") || 0;  // On défini le meilleur score du joueur s'il y en a un
 
+// Définition et pré-chargement des différents sons via Howler.js
+// Howler.js gère automatiquement la compatibilité audio cross-plateform (Desktop et mobile)
 const sounds = {
     red:    new Howl({ src: ["./sounds/red.mp3"],    volume: 0.15 }),
     blue:   new Howl({ src: ["./sounds/blue.mp3"],   volume: 0.15 }),
@@ -14,6 +16,8 @@ const sounds = {
     wrong:  new Howl({ src: ["./sounds/wrong.mp3"],  volume: 0.15 })
 };
 
+// Définition de la fonction pour jouer les sons propres à chaque bouton
+// Howler.js remplace new Audio() pour une meilleur compatibilité mobile
 function playSound(name) {
     sounds[name].play();
 }
@@ -70,6 +74,8 @@ $(document).on("keydown touchstart", function(e) {
 
     if ($(e.target).is("button") || $(e.target).closest("button").length > 0) return;   // On vérfie que la cible n'est pas un bouton ou à un lien avec un bouton pour ne pas lancer le jeu par erreur
     
+    // Sur mobile, le contexte audio peut être suspendu par le navigateur par défaut
+    // On force donc sa reprise dès le premier toucher pour garantir la lecture du premier son
     if (Howler.ctx && Howler.ctx.state === "suspended") {
         Howler.ctx.resume();
     }
