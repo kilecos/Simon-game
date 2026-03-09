@@ -6,32 +6,6 @@ let level = 0;               // On défini le niveau à l'ouverture de la page q
 let endGame = false;         // On défini une variable pour bloquer les clics pendant l'animation de fin pour ne pas relancer tout de suite si le joueur clique plusieurs fois d'affilée
 let bestScore = localStorage.getItem("simonBestScore") || 0;  // On défini le meilleur score du joueur s'il y en a un
 
-// Pré-chargement des sons
-const sounds = {
-    red:    new Audio("./sounds/red.mp3"),
-    blue:   new Audio("./sounds/blue.mp3"),
-    green:  new Audio("./sounds/green.mp3"),
-    yellow: new Audio("./sounds/yellow.mp3"),
-    wrong:  new Audio("./sounds/wrong.mp3")
-};
-Object.values(sounds).forEach(s => { s.volume = 0.15; s.load(); });
-
-// Déverrouillage synchrone au premier toucher
-let audioUnlocked = false;
-function unlockAudio() {
-    if (audioUnlocked) return;
-    audioUnlocked = true;
-    Object.values(sounds).forEach(s => {
-        s.play().catch(() => {});
-        s.pause();
-        s.currentTime = 0;
-    });
-}
-
-function playSound(name) {
-    sounds[name].currentTime = 0;
-    sounds[name].play().catch(() => {});
-}
 
 $("#best-score").text("Best Score : Level " + bestScore);  // On met à jour le texte selon le meilleur score du joueur
 
@@ -86,7 +60,6 @@ $(document).on("keydown touchstart", function(e) {
     if ($(e.target).is("button") || $(e.target).closest("button").length > 0) {   // On vérfie que la cible n'est pas un bouton ou à un lien avec un bouton pour ne pas lancer le jeu par erreur
         return;
     }
-    unlockAudio();
     handleStart();                     // On lance le jeu
 });
 
@@ -192,7 +165,7 @@ function nextSequence() {
     playSound(randomChosenColor);  // On joue le son correspondant à la couleur choisie par le jeu
 
 }
-/*
+
 // Définition de la fonction afin de jouer les sons propres à chaque boutons
 function playSound(name) {
 
@@ -201,7 +174,7 @@ function playSound(name) {
     audio.play().catch(() => {});                // On joue le son sélectionné
     
 
-} */
+}
 
 // Définition de la fonction pour le rendu visuel des boutons lorsqu'ils sont cliqués
 function animatePress(currentColour) {
