@@ -68,8 +68,10 @@ $(document).on("keydown touchstart", function(e) {
         return;
     }
 
-    if ($(e.target).is("button") || $(e.target).closest("button").length > 0) {   // On vérfie que la cible n'est pas un bouton ou à un lien avec un bouton pour ne pas lancer le jeu par erreur
-        return;
+    if ($(e.target).is("button") || $(e.target).closest("button").length > 0) return;   // On vérfie que la cible n'est pas un bouton ou à un lien avec un bouton pour ne pas lancer le jeu par erreur
+    
+    if (Howler.ctx && Howler.ctx.state === "suspended") {
+        Howler.ctx.resume();
     }
     handleStart();                     // On lance le jeu
 });
