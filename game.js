@@ -6,40 +6,31 @@ let level = 0;               // On défini le niveau à l'ouverture de la page q
 let endGame = false;         // On défini une variable pour bloquer les clics pendant l'animation de fin pour ne pas relancer tout de suite si le joueur clique plusieurs fois d'affilée
 let bestScore = localStorage.getItem("simonBestScore") || 0;  // On défini le meilleur score du joueur s'il y en a un
 
-// Web Audio API - Compatible mobile et desktop
-// ÉTAPE 1 : Pré-chargement des données audio au chargement de la page
-const audioArrayBuffers = {};
-const audioBuffers = {};
-let audioContext = null;
+// Pré-chargement des sons
+const sounds = {
+    red:    new Audio("./sounds/red.mp3"),
+    blue:   new Audio("./sounds/blue.mp3"),
+    green:  new Audio("./sounds/green.mp3"),
+    yellow: new Audio("./sounds/yellow.mp3"),
+    wrong:  new Audio("./sounds/wrong.mp3")
+};
+Object.values(sounds).forEach(s => { s.volume = 0.15; s.load(); });
 
-(async function preloadSounds() {
-    const names = ["red", "blue", "green", "yellow", "wrong"];
-    await Promise.all(names.map(async name => {
-        const response = await fetch("./sounds/" + name + ".mp3");
-        audioArrayBuffers[name] = await response.arrayBuffer();
-    }));
-})();
-
-// ÉTAPE 2 : Création du contexte audio uniquement au premier geste
-async function unlockAudio() {
-    if (audioContext) return;
-    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    await audioContext.resume();
-    const names = ["red", "blue", "green", "yellow", "wrong"];
-    await Promise.all(names.map(async name => {
-        audioBuffers[name] = await audioContext.decodeAudioData(audioArrayBuffers[name].slice());
-    }));
+// Déverrouillage synchrone au premier toucher
+let audioUnlocked = false;
+function unlockAudio() {
+    if (audioUnlocked) return;
+    audioUnlocked = true;
+    Object.values(sounds).forEach(s => {
+        s.play().catch(() => {});
+        s.pause();
+        s.currentTime = 0;
+    });
 }
 
 function playSound(name) {
-    if (!audioContext || !audioBuffers[name]) return;
-    const source = audioContext.createBufferSource();
-    source.buffer = audioBuffers[name];
-    const gain = audioContext.createGain();
-    gain.gain.value = 0.15;
-    source.connect(gain);
-    gain.connect(audioContext.destination);
-    source.start(0);
+    sounds[name].currentTime = 0;
+    sounds[name].play().catch(() => {});
 }
 
 $("#best-score").text("Best Score : Level " + bestScore);  // On met à jour le texte selon le meilleur score du joueur
@@ -85,7 +76,7 @@ function handleStart () {
 }
 
 // Début du jeu lors de la pression d'une touche du clavier ou touché de l'écran si sur appareil mobile
-$(document).on("keydown touchstart", async function(e) {
+$(document).on("keydown touchstart", function(e) {
 
     // Si le joueur à perdu, on bloque tout
     if (endGame) {
@@ -95,7 +86,7 @@ $(document).on("keydown touchstart", async function(e) {
     if ($(e.target).is("button") || $(e.target).closest("button").length > 0) {   // On vérfie que la cible n'est pas un bouton ou à un lien avec un bouton pour ne pas lancer le jeu par erreur
         return;
     }
-    await unlockAudio();
+    unlockAudio();
     handleStart();                     // On lance le jeu
 });
 
