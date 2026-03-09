@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="A little Simon Game made with HTML, CSS and jQuery.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Simon Game</title>
+    <link rel="icon" type="image/png" href="./image/simon_icon-1.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="./game.js" defer charset="utf-8"></script>
+  </head>
+  <body>
+    <main>
+      <h1 id="level-title">Press A Key to Start</h1>
+      <div class="score-board">
+        <h2 id="best-score">Best Score : Level 0</h2>
+        <button id="reset-btn">Reset Score</button>
+      </div>
+      <section class="container">
+        <div class="row">
+          <button id="green" class="btn green"></button>
+          <button id="red" class="btn red"></button>
+        </div>
+        <div class="row">
+          <button id="yellow" class="btn yellow"></button>
+          <button id="blue" class="btn blue"></button>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>&copy 2026, Kilian Lecossois</p>
+    </footer>
+    <div id="modal-confirm" class="modal-overlay" style="display: none;">
+      <div class="modal-box">
+        <p>Reset the Score ?</p>
+        <div class="modal-buttons">
+          <button id="btn-yes" class="modal-btn yes">YES</button>
+          <button id="btn-no" class="modal-btn no">NO</button>
+        </div>
+      </div>
+    </div>  
+  </body>
+</html>

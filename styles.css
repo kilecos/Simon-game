@@ -1,0 +1,211 @@
+body {
+  text-align: center;
+  background: radial-gradient(circle at center, #022c57 0%, #000 100%);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Personnalisation du message afficher en titre */
+#level-title {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 3rem;
+  margin:  5%;
+  color: #4DD0E1;
+  text-shadow: 0 0 10px rgba(77, 208, 225, 0.5);
+  letter-spacing: 3px;
+}
+
+.score-board {
+  margin-bottom: 20px;
+}
+
+#best-score {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.2rem;
+  letter-spacing: 3px;
+  color: #FFD700;
+  margin-top: -20px;
+  margin-bottom: 30px;
+  text-shadow: 3px 3px 0px #000;
+}
+
+#reset-btn {
+  background: transparent;
+  border: 2px solid #FEF2BF;
+  color: #FEF2BF;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.8rem;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#reset-btn:hover {
+  background-color: #ff4d4d;
+  border-color: #ff4d4d;
+  color: white;
+}
+
+/* Personnalisation de la boite contenant les boutons */
+.container {
+  display: block;
+  width: 50%;
+  max-width: 500px;
+  margin: auto;
+}
+
+/* Personnalisation de l'aspect global des boutons */
+.btn {
+  margin: 20px;
+  display: inline-block;
+  height: 180px;
+  width: 180px;
+  border: none;
+  border-radius: 20%;
+  box-shadow: 0 10px 0 rgba(0, 0, 0, 0.5), 0 10px 20px rgba(0, 0, 0, 0.4);
+  transition: all 0.1s ease;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tab-highlight-color: transparent;
+}
+
+/* Personnalisation de la classe qui sera appliquée au body lors d'une erreur du joueur */
+.game-over {
+  background-color: red;
+  background-image: none;
+  opacity: 0.8;
+}
+
+/* Personnalisation de la couleur des boutons */
+.red {
+  background: linear-gradient(145deg,#da4141, #b30000);
+}
+
+.green {
+  background: linear-gradient(145deg,#00b712, #00770b);
+}
+
+.blue {
+  background: linear-gradient(145deg,#2979ff, #0d47a1);
+}
+
+.yellow {
+  background: linear-gradient(145deg,#ffea00, #ffb300);
+}
+
+/* Personnalisation de la classe qui sera appliquée lors de la pression d'un bouton par le joueur */
+.pressed {
+  box-shadow: 0 0 10px white;
+  transform: translateY(8px);
+  filter: brightness(1.3);
+}
+
+footer {
+  margin-top: auto;
+  width: 100%;
+  font-family: 'Press Start 2P', cursive ;
+  font-size: 0.6rem;
+  padding: 20px 0;
+  color: #FEF2BF;
+  text-shadow: 3px 3px 1px black;
+}
+
+/* Personnalisation de la fenêtre qui s'ouvre quand le joueur clic sur le bouton Reset */
+
+/* Le fond sombre qui va courir tout l'écran */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 1000;
+/* Important pour centrer la boite au milieu de l'écran */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* La boite de dialogue */
+.modal-box {
+  background-color: #011F3F;
+  border: 4px solid #FEF2BF;
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  font-family: 'Press Start 2P', cursive;
+  color: #FEF2BF;
+  box-shadow: 0 0 20px #FFD700;
+  max-width: 80%;
+}
+
+.modal-box p {
+  line-height: 1.5;
+  font-size: 0.8rem;
+  margin-bottom: 20px;
+  text-shadow: 3px 3px 1px black;
+}
+
+/* Les boutons YES et NO de la boite */
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.modal-btn {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.7rem;
+  color: white;
+  padding: 10px 20px;
+  width: 80px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.modal-btn:active {
+  transform: scale(0.95);
+}
+
+.yes {
+  background-color: #ff4d4d;
+  box-shadow: 0 5px 0 #b30000;
+}
+
+.no {
+  background-color: #00b712;
+  box-shadow: 0 5px 0 #00770b;
+}
+
+/* Ajustement de personnalisation selon la taille de l'écran */
+@media screen and (max-width : 1024px) {
+
+  .container {
+    width: 100%;
+  }
+
+  #level-title {
+    font-size: 1.5rem;
+  }
+
+  #best-score {
+    font-size: 0.7rem;
+    margin-top: 5px;
+  }
+
+  #reset-btn {
+    font-size: 0.6rem;
+    padding: 5px 12px;
+  }
+
+  .btn {
+    height: 100px;
+    width: 100px;
+    margin: 15px;
+  }
+}
