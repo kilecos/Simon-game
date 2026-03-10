@@ -7,11 +7,99 @@ body {
   margin: 0;
 }
 
+/* Personnalisation du bouton d'ouverture de la modale affichant les règles du jeu */
+header {
+  text-align: end;
+}
+
+#rules-btn {
+  margin-top: 30px;
+  margin-right: 5%;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.3rem;
+  color: #FEF2BF;
+  width: 50px;
+  height: 50px;
+  border: 2px solid #FEF2BF;
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+#rules-btn:hover {
+  transform: scale(1.2);
+  background-color: #4DD0E1;
+  color: white;
+  border-color: white;
+}
+
+/* Personnalisation de la fenêtre contenant les règles du jeu */
+.box-rules {
+  max-height: 80vh;
+  overflow-y: auto;
+  width: 40%;
+}
+
+/* Personnalisation des boutons de la fenêtre des règles du jeu */
+#btn-close-top {
+  font-size: 0.9rem;
+  margin-left: 90%;
+  width: auto;
+}
+
+#btn-close-bottom {
+  width: auto;
+}
+
+/* Personnalisation du texte des règles du jeu */
+.rules-title {
+  margin-top: 20px;
+  color: #FFD700;
+  text-shadow: 3px 3px 1px black;
+}
+
+.rules-txt {
+  width: 80%;
+  margin: 50px auto;
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  letter-spacing: 1.8px;
+  line-height: 1.5;
+  font-size: 0.8rem;
+  text-shadow: 3px 3px 1px black;
+}
+
+.rules-txt p {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem !important;
+}
+
+.rules-txt span {
+  font-family: 'Press Start 2P', cursive;
+  color: #FFD700;
+  font-size: 1rem;
+}
+
+.rules-txt ul {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  list-style-type: square;
+}
+
+.rules-txt ul li {
+  margin-top: 20px;
+}
+
 /* Personnalisation du message afficher en titre */
 #level-title {
   font-family: 'Press Start 2P', cursive;
   font-size: 3rem;
   margin:  5%;
+  margin-top: 0;
   color: #4DD0E1;
   text-shadow: 0 0 10px rgba(77, 208, 225, 0.5);
   letter-spacing: 3px;
@@ -198,6 +286,39 @@ footer a:hover {
 
   .container {
     width: 100%;
+  }
+
+  #rules-btn {
+    font-size: 0.7rem;
+    width: 30px;
+    height: 30px;
+    margin-bottom: 20px;
+  }
+    
+  .box-rules {
+    width: 90%;
+    padding: 30px 10px;
+  }
+
+  #btn-close-top {
+    display: none;
+  }
+
+  .rules-title {
+    font-size: 1.2rem;
+  }
+
+  .rules-txt {
+    margin: 30px auto;
+  }
+
+  .rules-txt span{
+    font-size: 0.8rem;
+  }
+
+  .rules-txt ul {
+    list-style-position: inside;
+    padding: 0;
   }
 
   #level-title {

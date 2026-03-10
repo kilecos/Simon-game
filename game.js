@@ -24,7 +24,7 @@ function playSound(name) {
 
 $("#best-score").text("Best Score : Level " + bestScore);  // On met à jour le texte selon le meilleur score du joueur
 
-// Gestion du bouton Reset
+// Gestion du bouton Reset avec l'ouverture de la fenêtre modale de confirmation de reset de score
 $("#reset-btn").on("click touchstart", function(e) {
     e.stopPropagation();     // Si le joueur est sur mobile, on empêche le jeu de se déclencher à cause de la propagation d'évènement lors du touché du bouton RESET
     e.preventDefault();
@@ -33,13 +33,15 @@ $("#reset-btn").on("click touchstart", function(e) {
 
 });
 
-$("#btn-no").on("click", function() {      // Quand le joueur clic sur le bouton NO
+// Quand le joueur clic sur le bouton NO
+$("#btn-no").on("click", function() {
 
     $("#modal-confirm").fadeOut(200);      // On ferme simplement la fenêtre de confirmation
 
 });
 
-$("#btn-yes").on("click", function() {             // Quand le joueur clic sur le bouton YES
+// Quand le joueur clic sur le bouton YES
+$("#btn-yes").on("click", function() {
 
     localStorage.removeItem("simonBestScore");                   // On efface le score enregistré
     bestScore = 0;                                               // On le remet à 0             
@@ -48,7 +50,7 @@ $("#btn-yes").on("click", function() {             // Quand le joueur clic sur l
 
 });
 
- // Modification du titre si l'utilisateur est sur appareil mobile
+// Modification du titre si l'utilisateur est sur appareil mobile
 if ('ontouchstart' in window) {                          
     $("#level-title").text("Touch the Screen to Start");
 }
@@ -66,6 +68,8 @@ function handleStart () {
 
 // Début du jeu lors de la pression d'une touche du clavier ou touché de l'écran si sur appareil mobile
 $(document).on("keydown touchstart", function(e) {
+
+    if ($(e.target).is(".modal-overlay") || $(e.target).closest(".modal-overlay").length > 0) return; // On vérifie que la cible n'est pas une fenêtre modale ouverte ou en lien avec pour ne pas déclencher le jeu par accident
 
     // Si le joueur à perdu, on bloque tout
     if (endGame) {
@@ -195,3 +199,24 @@ function animatePress(currentColour) {
     }, 100);
 
 }
+
+// Ajout de la fonctionnalité d'ouverture d'une fenêtre modale contenant les règles du jeu
+$("#rules-btn").on("click touchstart", function(e) {
+    e.stopPropagation();     // Si le joueur est sur mobile, on empêche le jeu de se déclencher à cause de la propagation d'évènement lors du touché du bouton RESET
+    e.preventDefault();
+    
+    $("#modal-rules").fadeIn(200).css("display", "flex");   // On fait apparaitre la fenêtre des règles du jeu
+    $(".box-rules").scrollTop(0);            // On remet la barre de scroll en position initiale si la fenêtre avait déjà été ouverte
+});
+
+// Fermture de la fenêtre par clic sur l'un des deux boutons qu'elle contient
+$("#btn-close-top, #btn-close-bottom").on("click", function() {
+    $("#modal-rules").fadeOut(200);
+});
+
+// Fermeture de la fenêtre par clic en dehors de celle-ci
+$("#modal-rules").on('click', (e) => {
+    if ($(e.target).is($("#modal-rules"))) {
+        $("#modal-rules").fadeOut(200);
+    }
+});

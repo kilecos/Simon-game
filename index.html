@@ -15,6 +15,9 @@
     <script src="./game.js" defer charset="utf-8"></script>
   </head>
   <body>
+    <header>
+      <button id="rules-btn" title="Règles du jeu">?</button>
+    </header>
     <main>
       <h1 id="level-title">Press A Key to Start</h1>
       <div class="score-board">
@@ -43,6 +46,26 @@
           <button id="btn-yes" class="modal-btn yes">YES</button>
           <button id="btn-no" class="modal-btn no">NO</button>
         </div>
+      </div>
+    </div>
+    <div id="modal-rules" class="modal-overlay" style="display: none;">
+      <div class="modal-box box-rules">
+        <button id="btn-close-top" class="modal-btn yes">X</button>
+        <h2 class="rules-title">Règles du jeu</h2>
+        <div class="rules-txt">
+          <p><span>Objectif :</span> Reproduire la séquence de couleurs affichée par le jeu, dans le bon ordre et jusqu'au niveau le plus élevé possible.</p>
+          <p><span>Déroulement :</span> À chaque niveau, le jeu ajoute une nouvelle couleur à la séquence. Tu dois mémoriser et reproduire l'intégralité de la séquence dans le bon ordre en cliquant sur les boutons colorés.</p>
+          <span>Comment jouer :</span>
+          <ul>
+            <li>Appuie sur une touche du clavier (ou touche l'écran sur mobile) pour démarrer</li>
+            <li>Observe attentivement la séquence de couleurs affichée par le jeu</li>
+            <li>Reproduis cette séquence en cliquant sur les boutons dans le même ordre</li>
+            <li>À chaque niveau réussi, une nouvelle couleur s'ajoute à la séquence</li>
+            <li>Une erreur et c'est Game Over !</li>
+          </ul>
+          <p><span>Score :</span> Ton meilleur score est automatiquement sauvegardé. Essaie de le battre à chaque partie !</p>
+        </div>
+        <button id="btn-close-bottom" class="modal-btn yes">Fermer</button>
       </div>
     </div>  
   </body>
