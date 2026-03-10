@@ -40,6 +40,7 @@ body {
   padding: 8px 15px;
   border-radius: 5px;
   cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 }
 
 #reset-btn:hover {
@@ -110,6 +111,16 @@ footer {
   padding: 20px 0;
   color: #FEF2BF;
   text-shadow: 3px 3px 1px black;
+}
+
+footer a {
+  color: #4DD0E1;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+footer a:hover {
+  color: #FFD700;
 }
 
 /* Personnalisation de la fenêtre qui s'ouvre quand le joueur clic sur le bouton Reset */
