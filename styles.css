@@ -1,3 +1,15 @@
+/* Définition des couleurs utilisées pour la personnalisation */
+:root {
+  --cream : #FEF2BF;
+  --gold : #FFD700;
+  --cyan : #4DD0E1;
+  --red-light : #ff4d4d;
+  --red-dark : #b30000;
+  --green-light : #00b712;
+  --green-dark : #00770b;
+  --blue-dark : #011F3F;
+}
+
 body {
   text-align: center;
   background: radial-gradient(circle at center, #022c57 0%, #000 100%);
@@ -17,10 +29,10 @@ header {
   margin-right: 5%;
   font-family: 'Press Start 2P', cursive;
   font-size: 1.3rem;
-  color: #FEF2BF;
+  color: var(--cream);
   width: 50px;
   height: 50px;
-  border: 2px solid #FEF2BF;
+  border: 2px solid var(--cream);
   border-radius: 50%;
   background-color: transparent;
   cursor: pointer;
@@ -29,7 +41,7 @@ header {
 
 #rules-btn:hover {
   transform: scale(1.2);
-  background-color: #4DD0E1;
+  background-color: var(--cyan);
   color: white;
   border-color: white;
 }
@@ -55,7 +67,7 @@ header {
 /* Personnalisation du texte des règles du jeu */
 .rules-title {
   margin-top: 20px;
-  color: #FFD700;
+  color: var(--gold);
   text-shadow: 3px 3px 1px black;
 }
 
@@ -79,7 +91,7 @@ header {
 
 .rules-txt span {
   font-family: 'Press Start 2P', cursive;
-  color: #FFD700;
+  color: var(--gold);
   font-size: 1rem;
 }
 
@@ -100,7 +112,7 @@ header {
   font-size: 3rem;
   margin:  5%;
   margin-top: 0;
-  color: #4DD0E1;
+  color: var(--cyan);
   text-shadow: 0 0 10px rgba(77, 208, 225, 0.5);
   letter-spacing: 3px;
 }
@@ -113,7 +125,7 @@ header {
   font-family: 'Press Start 2P', cursive;
   font-size: 1.2rem;
   letter-spacing: 3px;
-  color: #FFD700;
+  color: var(--gold);
   margin-top: -20px;
   margin-bottom: 30px;
   text-shadow: 3px 3px 0px #000;
@@ -121,8 +133,8 @@ header {
 
 #reset-btn {
   background: transparent;
-  border: 2px solid #FEF2BF;
-  color: #FEF2BF;
+  border: 2px solid var(--cream);
+  color: var(--cream);
   font-family: 'Press Start 2P', cursive;
   font-size: 0.8rem;
   padding: 8px 15px;
@@ -132,8 +144,8 @@ header {
 }
 
 #reset-btn:hover {
-  background-color: #ff4d4d;
-  border-color: #ff4d4d;
+  background-color: var(--red-light);
+  border-color: var(--red-light);
   color: white;
 }
 
@@ -197,18 +209,18 @@ footer {
   font-family: 'Press Start 2P', cursive ;
   font-size: 0.6rem;
   padding: 20px 0;
-  color: #FEF2BF;
+  color: var(--cream);
   text-shadow: 3px 3px 1px black;
 }
 
 footer a {
-  color: #4DD0E1;
+  color: var(--cyan);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 footer a:hover {
-  color: #FFD700;
+  color: var(--gold);
 }
 
 /* Personnalisation de la fenêtre qui s'ouvre quand le joueur clic sur le bouton Reset */
@@ -230,14 +242,14 @@ footer a:hover {
 
 /* La boite de dialogue */
 .modal-box {
-  background-color: #011F3F;
-  border: 4px solid #FEF2BF;
+  background-color: var(--blue-dark);
+  border: 4px solid var(--cream);
   border-radius: 15px;
   padding: 30px;
   text-align: center;
   font-family: 'Press Start 2P', cursive;
-  color: #FEF2BF;
-  box-shadow: 0 0 20px #FFD700;
+  color: var(--cream);
+  box-shadow: 0 0 20px var(--gold);
   max-width: 80%;
 }
 
@@ -272,13 +284,13 @@ footer a:hover {
 }
 
 .yes {
-  background-color: #ff4d4d;
-  box-shadow: 0 5px 0 #b30000;
+  background-color: var(--red-light);
+  box-shadow: 0 5px 0 var(--red-dark);
 }
 
 .no {
-  background-color: #00b712;
-  box-shadow: 0 5px 0 #00770b;
+  background-color: var(--green-light);
+  box-shadow: 0 5px 0 var(--green-dark);
 }
 
 /* Ajustement de personnalisation selon la taille de l'écran */
