@@ -22,7 +22,7 @@ function playSound(name) {
     sounds[name].play();
 }
 
-$("#best-score").text("Best Score : Level " + bestScore);  // On met à jour le texte selon le meilleur score du joueur
+$("#best-score").text("Record : Niveau " + bestScore);  // On met à jour le texte selon le meilleur score du joueur
 
 // Gestion du bouton Reset avec l'ouverture de la fenêtre modale de confirmation de reset de score
 $("#reset-btn").on("click touchstart", function(e) {
@@ -45,22 +45,22 @@ $("#btn-yes").on("click", function() {
 
     localStorage.removeItem("simonBestScore");                   // On efface le score enregistré
     bestScore = 0;                                               // On le remet à 0             
-    $("#best-score").text("Best Score : Level " + bestScore);    // On affiche le texte de score mis à jour
+    $("#best-score").text("Record : Niveau " + bestScore);    // On affiche le texte de score mis à jour
     $("#modal-confirm").fadeOut(200);                            // On ferme la fenêtre de confirmation
 
 });
 
 // Modification du titre si l'utilisateur est sur appareil mobile
 if ('ontouchstart' in window) {                          
-    $("#level-title").text("Touch the Screen to Start");
+    $("#level-title").text("Touche l'écran pour Commencer");
 }
 
 
 // Définition de la fonction de lancement du jeu
 function handleStart () {
     if(!started) {
-        $("#level-title").text("Level " + level);       // On affiche le niveau du jeu, initialement 0, qui passera à 1 au lancement du jeu
-        $("#best-score").text("Best Score : Level " + bestScore);
+        $("#level-title").text("Niveau " + level);       // On affiche le niveau du jeu, initialement 0, qui passera à 1 au lancement du jeu
+        $("#best-score").text("Record : Niveau " + bestScore);
         nextSequence();
         started = true;
     }
@@ -141,7 +141,7 @@ function checkAnswer(currentLevel) {
         if (currentScore > bestScore) {       // On compare si la partie actuelle à eu un meilleur résultat que le meilleur score enregistré
             bestScore = currentScore;         // Si c'est le cas on remplace le meilleur score
             localStorage.setItem("simonBestScore", bestScore);         // On enregistre ce nouveau meilleur score
-            $("#best-score").text("New Record ! Level " + bestScore);  // On annonce au joueur qu'il a battu son record
+            $("#best-score").text("Nouveau Record ! Niveau " + bestScore);  // On annonce au joueur qu'il a battu son record
         }
 
         $("#level-title").text("Game Over !");     // On affiche le message de game over
@@ -149,9 +149,9 @@ function checkAnswer(currentLevel) {
         // On défini la durée de blocage (1s) avant de pouvoir relancer le jeu
         setTimeout(function() {
             if ('ontouchstart' in window) {
-                $("#level-title").text("Game Over ! Touch the Screen to Restart");    // On affiche le message indiquant que le joueur peut relancer une partie
+                $("#level-title").text("Game Over ! Touche l'écran pour Relancer");    // On affiche le message indiquant que le joueur peut relancer une partie
         } else {
-                $("#level-title").text("Game Over ! Press Any Key to Restart");    
+                $("#level-title").text("Game Over ! Appuie sur une touche pour Relancer");    
         }
         startOver();            // On appelle la fonction qui débute une nouvelle partie
         endGame = false;        // On désactive le verrou, le joueur peut relancer une partie
@@ -175,7 +175,7 @@ function nextSequence() {
 
     level++;   // On incrémente le niveau pour pouvoir l'afficher en tant que titre de la page
 
-    $("#level-title").text("Level " + level);   // On change le titre pour qu'il corresponde au niveau actuel du jeu
+    $("#level-title").text("Niveau " + level);   // On change le titre pour qu'il corresponde au niveau actuel du jeu
 
     let randomNumber = Math.floor(Math.random() * 4);  // On génère un nombre aléatoire entre 0 et 3
 

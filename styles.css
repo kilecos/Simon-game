@@ -288,6 +288,10 @@ footer a:hover {
     width: 100%;
   }
 
+  .reset {
+    width: 220px;
+  }
+
   #rules-btn {
     font-size: 0.7rem;
     width: 30px;
