@@ -56,7 +56,7 @@ $("#btn-yes").on("click", function() {
 
 // Modification du titre si l'utilisateur est sur appareil mobile
 if ('ontouchstart' in window) {                          
-    $("#level-title").text("Touche l'écran pour Commencer");
+    $("#level-title").text("Touche ICI pour Commencer");
 }
 
 
@@ -70,24 +70,31 @@ function handleStart () {
     }
 }
 
-// Début du jeu lors de la pression d'une touche du clavier ou touché de l'écran si sur appareil mobile
-$(document).on("keydown touchstart", function(e) {
-
-    if ($(e.target).is(".modal-overlay") || $(e.target).closest(".modal-overlay").length > 0) return; // On vérifie que la cible n'est pas une fenêtre modale ouverte ou en lien avec pour ne pas déclencher le jeu par accident
+// Début du jeu lors de la pression d'une touche du clavier
+$(document).on("keydown", function() {
 
     // Si le joueur à perdu, on bloque tout
     if (gameState.endGame) {
         return;
     }
 
-    if ($(e.target).is("button") || $(e.target).closest("button").length > 0) return;   // On vérfie que la cible n'est pas un bouton ou à un lien avec un bouton pour ne pas lancer le jeu par erreur
-    
+    handleStart();  // On lance le jeu
+});
+
+// Début du jeu lors du toucher sur le titre
+$("#level-title").on("touchend", function() {
+
+    if (gameState.endGame) {
+        return;
+    }
+
     // Sur mobile, le contexte audio peut être suspendu par le navigateur par défaut
     // On force donc sa reprise dès le premier toucher pour garantir la lecture du premier son
     if (Howler.ctx && Howler.ctx.state === "suspended") {
         Howler.ctx.resume();
     }
-    handleStart();                     // On lance le jeu
+
+    handleStart();
 });
 
 // Ce qu'il se passe lors du clic du joueur sur l'un des boutons
@@ -100,8 +107,12 @@ $(".btn").on("click", function(){
 
     // Si le jeu n'a pas encore commencé (Game Over ou première partie)
     if (!gameState.started) {
-        handleStart();  // On lance de le jeu
-        return;         // Important pour ne pas enregistrer le premier clic comme une erreur
+        if ('ontouchstart' in window) {
+            return;
+        } else {
+            handleStart();  // On lance de le jeu
+            return;         // Important pour ne pas enregistrer le premier clic comme une erreur 
+        }
     }
 
     let userChosenColour = $(this).attr("id");  // On identifie le bouton cliqué
