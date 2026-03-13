@@ -37,6 +37,7 @@ header {
   background-color: transparent;
   cursor: pointer;
   transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent
 }
 
 #rules-btn:hover {
@@ -161,6 +162,7 @@ header {
   border-radius: 5px;
   cursor: pointer;
   transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
 #reset-btn:hover {

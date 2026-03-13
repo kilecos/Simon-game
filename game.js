@@ -29,7 +29,7 @@ function playSound(name) {
 $("#best-score").text("Record : Niveau " + gameState.bestScore);  // On met à jour le texte selon le meilleur score du joueur
 
 // Gestion du bouton Reset avec l'ouverture de la fenêtre modale de confirmation de reset de score
-$("#reset-btn").on("click touchstart", function(e) {
+$("#reset-btn").on("click touchend", function(e) {
     e.stopPropagation();     // Si le joueur est sur mobile, on empêche le jeu de se déclencher à cause de la propagation d'évènement lors du touché du bouton RESET
     e.preventDefault();
 
@@ -218,7 +218,7 @@ function animatePress(currentColour) {
 }
 
 // Ajout de la fonctionnalité d'ouverture d'une fenêtre modale contenant les règles du jeu
-$("#rules-btn").on("click touchstart", function(e) {
+$("#rules-btn").on("click touchend", function(e) {
     e.stopPropagation();     // Si le joueur est sur mobile, on empêche le jeu de se déclencher à cause de la propagation d'évènement lors du touché du bouton RESET
     e.preventDefault();
     
