@@ -189,7 +189,7 @@ header {
   transition: all 0.1s ease;
   cursor: pointer;
   touch-action: manipulation;
-  -webkit-tab-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Personnalisation de la classe qui sera appliquée au body lors d'une erreur du joueur */
