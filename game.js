@@ -1,11 +1,12 @@
 const buttonColours = ["red", "blue", "green", "yellow"];  // Les couleurs des boutons
 // Déclaration de l'objet gameState centralisant l'état du jeu en tant que propriétés
 const gameState = {
-    gamePattern : [],        // Les couleurs qui seront choisies aléatoirement par le jeu et qui seront mis à la suite les unes des autres
-    userClickedPattern : [], // Les couleurs qui seront sélectionnées par le joueur et qui seront mis à la suite les unes des autres
-    started : false,         // On défini le jeu comme non démarré
-    level : 0,               // On défini le niveau à l'ouverture de la page qui sera incrémenté au lancement
-    endGame : false,         // On défini une variable pour bloquer les clics pendant l'animation de fin pour ne pas relancer tout de suite si le joueur clique plusieurs fois d'affilée
+    gamePattern : [],           // Les couleurs qui seront choisies aléatoirement par le jeu et qui seront mis à la suite les unes des autres
+    userClickedPattern : [],    // Les couleurs qui seront sélectionnées par le joueur et qui seront mis à la suite les unes des autres
+    started : false,            // On défini le jeu comme non démarré
+    level : 0,                  // On défini le niveau à l'ouverture de la page qui sera incrémenté au lancement
+    isPlayingSequence : false,  // On défini le moment ou c'est au tour du jeu
+    endGame : false,            // On défini une variable pour bloquer les clics pendant l'animation de fin pour ne pas relancer tout de suite si le joueur clique plusieurs fois d'affilée
     bestScore : localStorage.getItem("simonBestScore") || 0  // On défini le meilleur score du joueur s'il y en a un
 };
 
@@ -101,6 +102,11 @@ $("#level-title").on("touchend", function() {
 // Ce qu'il se passe lors du clic du joueur sur l'un des boutons
 $(".btn").on("click", function(){
 
+    // Si c'est au tour du jeu, il ne se passe rien car les clics sont bloqué
+    if (gameState.isPlayingSequence) {
+        return;
+    }
+
     // Si le joueur à perdu, on bloque tout
     if (gameState.endGame) {
         return;
@@ -188,6 +194,8 @@ function startOver() {
 // Fonctionnement du jeu
 function nextSequence() {
 
+    gameState.isPlayingSequence = true;  // On indique que le jeu est en train de jouer pour bloquer tous clics du joueur
+
     gameState.userClickedPattern = [];    // Réinitialisation de la liste de couleurs choisies par le joueur
 
     gameState.level++;   // On incrémente le niveau pour pouvoir l'afficher en tant que titre de la page
@@ -200,10 +208,28 @@ function nextSequence() {
 
     gameState.gamePattern.push(randomChosenColor);  // On rajoute cette couleur à la liste de couleurs sélectionnées par le jeu
 
-    $("#" + randomChosenColor).fadeIn(100).fadeOut(100).fadeIn(100);  // On met une animation pour bien distinguer la couleur choisie par le jeu
-
-    playSound(randomChosenColor);  // On joue le son correspondant à la couleur choisie par le jeu
-
+    // Pour chaque couleur de la séquence du jeu 
+    gameState.gamePattern.forEach(function(color, index) {
+        setTimeout(function() {
+            // Si c'est la dernière couleur choisie (randomChosenColor)
+            if (index === gameState.gamePattern.length - 1) {
+                // On applique une animation sur le bouton sélectionné par le jeu pour le rendre visible
+                $("#" + color).fadeIn(100).fadeOut(100).fadeIn(100).promise().done(function() {
+                    // On désactive l'état disant que c'est le tour du jeu pour de nouveau permettre les clics du joueur
+                    gameState.isPlayingSequence = false;
+                });
+                // On joue le son correspondant à la couleur choisie
+                playSound(color)
+            // Si ce n'est pas la dernière couleur choisie
+            } else {
+                // On applique une animatin sur les boutons sélectionnés par le jeu
+                $("#" + color).fadeIn(100).fadeOut(100).fadeIn(100);
+                // On joue le son correspondant aux couleurs
+                playSound(color);
+            }
+            // Chaque couleur attend son tour, 400 correspond au délai entre chaque couleur
+        }, index * 400);
+    });
 }
 
 // Définition de la fonction pour le rendu visuel des boutons lorsqu'ils sont cliqués
