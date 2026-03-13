@@ -63,6 +63,7 @@ if ('ontouchstart' in window) {
 // Définition de la fonction de lancement du jeu
 function handleStart () {
     if(!gameState.started) {
+        $("#level-title").removeClass("anim-title");
         $("#level-title").text("Niveau " + gameState.level);       // On affiche le niveau du jeu, initialement 0, qui passera à 1 au lancement du jeu
         $("#best-score").text("Record : Niveau " + gameState.bestScore);
         nextSequence();
@@ -164,10 +165,11 @@ function checkAnswer(currentLevel) {
         // On défini la durée de blocage (1s) avant de pouvoir relancer le jeu
         setTimeout(function() {
             if ('ontouchstart' in window) {
-                $("#level-title").text("Game Over ! Touche l'écran pour Relancer");    // On affiche le message indiquant que le joueur peut relancer une partie
+                $("#level-title").text("Game Over ! Touche ICI pour Relancer");    // On affiche le message indiquant que le joueur peut relancer une partie
         } else {
                 $("#level-title").text("Game Over ! Appuie sur une touche pour Relancer");    
         }
+        $("#level-title").addClass("anim-title");
         startOver();            // On appelle la fonction qui débute une nouvelle partie
         gameState.endGame = false;        // On désactive le verrou, le joueur peut relancer une partie
         }, 1000);

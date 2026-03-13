@@ -120,6 +120,22 @@ header {
   letter-spacing: 3px;
 }
 
+/* Animation sur le titre */
+#level-title.anim-title {
+  background: linear-gradient(to right,rgba(0, 183, 18, 1) 0%, rgba(218, 65, 65, 1) 25%, rgba(255, 234, 0, 1) 50%, rgba(41, 121, 255, 1) 75%, rgba(0, 183, 18, 1) 100%);
+  background-size: 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: 1s linear infinite color-title;
+}
+
+@keyframes color-title {
+  0% {background-position: 0%;}
+  100% {background-position: 100%;}
+}
+
+/* Personnalisation de l'écran de record */
 .score-board {
   margin-bottom: 20px;
 }
@@ -134,6 +150,7 @@ header {
   text-shadow: 3px 3px 0px #000;
 }
 
+/* Personnalisation du bouton de reset du record */
 #reset-btn {
   background: transparent;
   border: 2px solid var(--cream);
