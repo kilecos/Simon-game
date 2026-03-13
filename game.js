@@ -137,12 +137,14 @@ $(".btn").on("click", function(){
 // Définition de la fonction de vérification des réponses du joueur
 function checkAnswer(currentLevel) {
 
-    if (gameState.userClickedPattern[currentLevel] === gameState.gamePattern[currentLevel]) {  // On compare les sélections du joueur par rapport à celles du jeu
+    // On compare les sélections du joueur par rapport à celles du jeu
+    if (gameState.userClickedPattern[currentLevel] === gameState.gamePattern[currentLevel]) {  
 
-        // Si cela est correct on enchaine sur le niveau suivant
-        if (gameState.userClickedPattern.length === gameState.gamePattern.length) {            
+        // On compare la longueur des séquences du jeu et du joueur
+        if (gameState.userClickedPattern.length === gameState.gamePattern.length) {    
+            gameState.isPlayingSequence = true;    // On empêche les clics supplémentaires lorsque la séquence est complétée
             setTimeout(function() {     // On établi un délai de 1 seconde avant que le jeu enchaine sur le niveau suivant
-                nextSequence();
+                nextSequence();         // On enchaine sur le niveau suivant
             }, 1000);
         }
     // Si incorrect, on affiche le message de fin de jeu avec une animation sur le body du site et on invite le joueur à relancer une partie
