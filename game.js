@@ -248,7 +248,7 @@ function animatePress(currentColour) {
 
 // Ajout de la fonctionnalité d'ouverture d'une fenêtre modale contenant les règles du jeu
 $("#rules-btn").on(interact, function(e) {
-    e.stopPropagation();     // Si le joueur est sur mobile, on empêche le jeu de se déclencher à cause de la propagation d'évènement lors du touché du bouton RESET
+    e.stopPropagation();     // Si le joueur est sur mobile, on empêche le jeu de se déclencher à cause de la propagation d'évènement lors du touché du bouton "?"
     
     $("#modal-rules").fadeIn(200).css("display", "flex");   // On fait apparaitre la fenêtre des règles du jeu
     $(".box-rules").scrollTop(0);            // On remet la barre de scroll en position initiale si la fenêtre avait déjà été ouverte
