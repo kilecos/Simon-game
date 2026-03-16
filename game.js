@@ -285,3 +285,7 @@ $("#modal-rules").on('click', (e) => {
         $("#modal-rules").fadeOut(200);
     }
 });
+
+$("#rules-btn, #reset-btn, a").on("keydown", function (e) {
+    e.stopPropagation();
+});
