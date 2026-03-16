@@ -10,6 +10,8 @@ const gameState = {
     bestScore : localStorage.getItem("simonBestScore") || 0  // On défini le meilleur score du joueur s'il y en a un
 };
 
+// Définition de la variable de l'évènement à écouter selon le device
+const interact = "ontouchstart" in window ? "touchend" : "click";
 
 // Définition et pré-chargement des différents sons via Howler.js
 // Howler.js gère automatiquement la compatibilité audio cross-plateform (Desktop et mobile)
@@ -30,9 +32,8 @@ function playSound(name) {
 $("#best-score").text("Record : Niveau " + gameState.bestScore);  // On met à jour le texte selon le meilleur score du joueur
 
 // Gestion du bouton Reset avec l'ouverture de la fenêtre modale de confirmation de reset de score
-$("#reset-btn").on("click touchend", function(e) {
+$("#reset-btn").on(interact, function(e) {
     e.stopPropagation();     // Si le joueur est sur mobile, on empêche le jeu de se déclencher à cause de la propagation d'évènement lors du touché du bouton RESET
-    e.preventDefault();
 
     $("#modal-confirm").fadeIn(200).css("display", "flex");   // On fait apparaitre la fenêtre de confirmation de reset de score
 
@@ -246,9 +247,8 @@ function animatePress(currentColour) {
 }
 
 // Ajout de la fonctionnalité d'ouverture d'une fenêtre modale contenant les règles du jeu
-$("#rules-btn").on("click touchend", function(e) {
+$("#rules-btn").on(interact, function(e) {
     e.stopPropagation();     // Si le joueur est sur mobile, on empêche le jeu de se déclencher à cause de la propagation d'évènement lors du touché du bouton RESET
-    e.preventDefault();
     
     $("#modal-rules").fadeIn(200).css("display", "flex");   // On fait apparaitre la fenêtre des règles du jeu
     $(".box-rules").scrollTop(0);            // On remet la barre de scroll en position initiale si la fenêtre avait déjà été ouverte
