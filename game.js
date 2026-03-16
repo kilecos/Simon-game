@@ -31,11 +31,36 @@ function playSound(name) {
 
 $("#best-score").text("Record : Niveau " + gameState.bestScore);  // On met à jour le texte selon le meilleur score du joueur
 
+// On défini une fonction afin de bloquer le focus clavier à l'intérieur des fenêtre modales
+function focusTrap (modalId) {
+	$(modalId).on("keydown", function (e) {
+		if (e.key === "Tab") {
+            // On défini des variables renvoyant aux boutons contenus dans les modales
+			let focusables = $(modalId).find("button");
+			let first = focusables.first();
+			let last = focusables.last();
+            // On établi la navigation entre les boutons pour rester à l'intérieur de la fenêtre modale
+			if ($(document.activeElement).is(first) && e.shiftKey) {
+				last.focus();
+				e.preventDefault();
+			} else if ($(document.activeElement).is(last) && !e.shiftKey) {
+				first.focus();
+				e.preventDefault();
+			}
+		}
+	});
+}
+
+// On initialise cette fonction pour nos 2 modales au chargement de la page
+focusTrap("#modal-confirm");
+focusTrap("#modal-rules");
+
 // Gestion du bouton Reset avec l'ouverture de la fenêtre modale de confirmation de reset de score
 $("#reset-btn").on(interact, function(e) {
     e.stopPropagation();     // Si le joueur est sur mobile, on empêche le jeu de se déclencher à cause de la propagation d'évènement lors du touché du bouton RESET
 
     $("#modal-confirm").fadeIn(200).css("display", "flex");   // On fait apparaitre la fenêtre de confirmation de reset de score
+    $("#btn-no").focus();    // On focus le bouton "NON" à l'ouverture de la fenêtre lors de la navigation au clavier
 
 });
 
@@ -272,6 +297,7 @@ $("#rules-btn").on(interact, function(e) {
     
     $("#modal-rules").fadeIn(200).css("display", "flex");   // On fait apparaitre la fenêtre des règles du jeu
     $(".box-rules").scrollTop(0);            // On remet la barre de scroll en position initiale si la fenêtre avait déjà été ouverte
+    $("#btn-close-top").focus();             // On focus le bouton "X" à l'ouverture de la modale lors de la navigation au clavier
 });
 
 // Fermture de la fenêtre par clic sur l'un des deux boutons qu'elle contient
@@ -286,6 +312,10 @@ $("#modal-rules").on('click', (e) => {
     }
 });
 
-$("#rules-btn, #reset-btn, a").on("keydown", function (e) {
-    e.stopPropagation();
+// On empêche le déclenchement du jeu lors de l'activation des boutons des modales et du lien dans le footer par les touches Entrée et Espace
+$("#rules-btn, #reset-btn, a, #btn-close-top, #btn-close-bottom, #btn-yes, #btn-no").on("keydown", function (e) {
+    // On exclu la touche Tab pour permettre à la fonction focusTrap de s'exécuter
+    if (e.key !== "Tab") {
+        e.stopPropagation();
+    }
 });
