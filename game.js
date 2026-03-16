@@ -74,14 +74,16 @@ function handleStart () {
 }
 
 // Début du jeu lors de la pression d'une touche du clavier
-$(document).on("keydown", function() {
+$(document).on("keydown", function(e) {
 
-    // Si le joueur à perdu, on bloque tout
-    if (gameState.endGame) {
-        return;
-    }
-
-    handleStart();  // On lance le jeu
+    // On exclu la touche Tab pour garder l'accessibilité de la sélection au clavier
+    if (e.key !== "Tab") {
+		// Si le joueur à perdu, on bloque tout
+	    if (gameState.endGame) {
+			return;
+		}
+		handleStart();  // On lance le jeu
+	}
 });
 
 // Début du jeu lors du toucher sur le titre
