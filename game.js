@@ -194,6 +194,22 @@ function startOver() {
     gameState.started = false;
 }
 
+// Définition de la fonction gameSpeed afin de pouvoir ajuster la vitesse du jeu en fonction du niveau
+// Chaque return renvoie la vitesse en milliseconde que le jeu aura
+function gameSpeed () {
+	if (gameState.level > 20) {
+		return 250;
+	} else if (gameState.level > 15) {
+		return 300;
+	} else if (gameState.level > 10) {
+		return 350;
+	} else if (gameState.level > 5) {
+		return 400;
+	} else {
+		return 450;
+	}
+}
+
 // Fonctionnement du jeu
 function nextSequence() {
 
@@ -210,6 +226,8 @@ function nextSequence() {
     let randomChosenColor = buttonColours[randomNumber];  // On fait correspondre ce nombre à une des couleurs listées à la ligne 1
 
     gameState.gamePattern.push(randomChosenColor);  // On rajoute cette couleur à la liste de couleurs sélectionnées par le jeu
+
+    let actualSpeed = gameSpeed();  // On défini la variable représentant le vitesse actuelle du jeu en fonction du niveau
 
     // Pour chaque couleur de la séquence du jeu 
     gameState.gamePattern.forEach(function(color, index) {
@@ -230,8 +248,8 @@ function nextSequence() {
                 // On joue le son correspondant aux couleurs
                 playSound(color);
             }
-            // Chaque couleur attend son tour, 400 correspond au délai entre chaque couleur
-        }, index * 400);
+            // Chaque couleur attend son tour, actualSpeed renvoi délai entre chaque couleur en fonction du niveau du jeu
+        }, index * actualSpeed);
     });
 }
 
