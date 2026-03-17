@@ -18,14 +18,17 @@
   </head>
   <body>
     <header>
+      <!--Bouton ouvrant la fenêtre modale conenant les règles du jeu-->
       <button id="rules-btn" title="Règles du jeu" aria-label="Bouton d'affichage des règles du jeu">?</button>
     </header>
     <main>
       <h1 id="level-title" class="anim-title">Appuie sur une touche pour Commencer</h1>
+      <!--Partie contenant le meilleur score au jeu et le bouton pour le réinitialiser-->
       <div class="score-board">
         <h2 id="best-score">Record : Niveau 0</h2>
         <button id="reset-btn">Réinitialiser Record</button>
       </div>
+      <!--Partie contenant les boutons intéractifs du jeu-->
       <section class="container">
         <div class="row">
           <button id="green" class="btn green" aria-label="Bouton de jeu Vert"></button>
@@ -41,6 +44,7 @@
       <p>&copy; 2026, Kilian Lecossois</p>
       <a href="https://github.com/kilecos/Simon-game.git" target="_blank" rel="noreferrer noopener">Lien du Projet</a>
     </footer>
+    <!--La fenêtre modale demandant confirmation avant de remettre le score à 0-->
     <div id="modal-confirm" class="modal-overlay" style="display: none;">
       <div class="modal-box reset">
         <p>Veux-tu réinitialiser ton Record ?</p>
@@ -50,6 +54,7 @@
         </div>
       </div>
     </div>
+    <!--La fenêtre modale contenant les règles du jeu qui s'ouvre lors du clic sur le bouton "?"-->
     <div id="modal-rules" class="modal-overlay" style="display: none;">
       <div class="modal-box box-rules">
         <button id="btn-close-top" class="modal-btn yes">X</button>
