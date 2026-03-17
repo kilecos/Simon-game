@@ -101,14 +101,24 @@ function handleStart () {
 // Début du jeu lors de la pression d'une touche du clavier
 $(document).on("keydown", function(e) {
 
-    // On exclu la touche Tab pour garder l'accessibilité de la sélection au clavier
-    if (e.key !== "Tab") {
+    // On exclu les touches Tab et Echap pour garder l'accessibilité de la sélection au clavier
+    if (e.key !== "Tab" && e.key !== "Escape") {
 		// Si le joueur à perdu, on bloque tout
 	    if (gameState.endGame) {
 			return;
 		}
 		handleStart();  // On lance le jeu
 	}
+
+    // Si l'on appuie sur Echap lorsqu'une modale est ouverte, celle-ci se ferme
+    if (e.key === "Escape" && $("#modal-confirm").is(":visible")) {
+        $("#modal-confirm").fadeOut(200);
+    }
+
+    if (e.key === "Escape" && $("#modal-rules").is(":visible")) {
+        $("#modal-rules").fadeOut(200);
+    }
+    
 });
 
 // Début du jeu lors du toucher sur le titre
@@ -317,8 +327,8 @@ $("#modal-rules, #modal-confirm").on('click', (e) => {
 
 // On empêche le déclenchement du jeu lors de l'activation des boutons des modales et du lien dans le footer par les touches Entrée et Espace
 $("#rules-btn, #reset-btn, a, #btn-close-top, #btn-close-bottom, #btn-yes, #btn-no").on("keydown", function (e) {
-    // On exclu la touche Tab pour permettre à la fonction focusTrap de s'exécuter
-    if (e.key !== "Tab") {
+    // On exclu la touche Tab pour permettre à la fonction focusTrap de s'exécuter et la touche Echap pour pouvoir fermer les modales avec cette dernière
+    if (e.key !== "Tab" && e.key !== "Escape") {
         e.stopPropagation();
     }
 });
