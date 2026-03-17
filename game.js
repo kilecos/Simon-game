@@ -305,10 +305,13 @@ $("#btn-close-top, #btn-close-bottom").on("click", function() {
     $("#modal-rules").fadeOut(200);
 });
 
-// Fermeture de la fenêtre par clic en dehors de celle-ci
-$("#modal-rules").on('click', (e) => {
+// Fermeture des fenêtres modales par clic en dehors de celles-ci
+$("#modal-rules, #modal-confirm").on('click', (e) => {
     if ($(e.target).is($("#modal-rules"))) {
         $("#modal-rules").fadeOut(200);
+    }
+    if ($(e.target).is($("#modal-confirm"))) {
+        $("#modal-confirm").fadeOut(200);
     }
 });
 
