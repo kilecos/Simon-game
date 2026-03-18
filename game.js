@@ -266,13 +266,15 @@ function nextSequence() {
 
     let actualSpeed = gameSpeed();  // On défini la variable représentant le vitesse actuelle du jeu en fonction du niveau
 
+    let animationTime = actualSpeed / 4;  // On défini la variable du temps d'animation des boutons pour qu'elle s'adapte à la vitesse du jeu
+
     // Pour chaque couleur de la séquence du jeu 
     gameState.gamePattern.forEach(function(color, index) {
         setTimeout(function() {
             // Si c'est la dernière couleur choisie (randomChosenColor)
             if (index === gameState.gamePattern.length - 1) {
                 // On applique une animation sur le bouton sélectionné par le jeu pour le rendre visible
-                $("#" + color).fadeIn(100).fadeOut(100).fadeIn(100).promise().done(function() {
+                $("#" + color).fadeIn(animationTime).fadeOut(animationTime).fadeIn(animationTime).promise().done(function() {
                     // On désactive l'état disant que c'est le tour du jeu pour de nouveau permettre les clics du joueur
                     gameState.isPlayingSequence = false;
                 });
@@ -281,7 +283,7 @@ function nextSequence() {
             // Si ce n'est pas la dernière couleur choisie
             } else {
                 // On applique une animatin sur les boutons sélectionnés par le jeu
-                $("#" + color).fadeIn(100).fadeOut(100).fadeIn(100);
+                $("#" + color).fadeIn(animationTime).fadeOut(animationTime).fadeIn(animationTime);
                 // On joue le son correspondant aux couleurs
                 playSound(color);
             }
