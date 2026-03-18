@@ -231,21 +231,29 @@ function startOver() {
     gameState.started = false;
 }
 
+// On défini un tableau contenant les différents paliers de jeu et les vitesse de séquence correspondantes
+// Il est organisé en ordre décroissant car nous utilisons la méthode find() qui va retourner le premier élément du tableau répondant à notre condition
+const paliers = [
+	{level : 20, speed : 250}, 
+	{level : 15, speed : 300}, 
+	{level : 10, speed : 350}, 
+	{level : 5, speed : 400}, 
+	{level : 0, speed : 450}
+];	
+
 // Définition de la fonction gameSpeed afin de pouvoir ajuster la vitesse du jeu en fonction du niveau
-// Chaque return renvoie la vitesse en milliseconde que le jeu aura
 function gameSpeed () {
-	if (gameState.level > 20) {
-		return 250;
-	} else if (gameState.level > 15) {
-		return 300;
-	} else if (gameState.level > 10) {
-		return 350;
-	} else if (gameState.level > 5) {
-		return 400;
-	} else {
-		return 450;
-	}
+    // Définition du palier actuel par la méthode find()
+    // find() va retourner le premier élément du tableau répondant à la condtion à l'intérieur de function (palier)
+	let palierActuel = paliers.find(function (palier) {
+        // La condition de notre find()
+        // Retourne true ou false, si false on regarde l'élément suivant du tableau et si true find() s'arrête (on a trouvé notre élément)
+		return gameState.level > palier.level;
+	});
+    // Return renvoie la vitesse correspondante au palier trouvé avec find()
+	return palierActuel.speed;
 }
+
 
 // Fonctionnement du jeu
 function nextSequence() {
