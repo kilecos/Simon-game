@@ -137,8 +137,8 @@ $("#level-title").on("touchend", function() {
     handleStart();
 });
 
-// Ce qu'il se passe lors du clic du joueur sur l'un des boutons
-$(".btn").on("click", function(){
+// Ce qu'il se passe lors du clic ou touché du joueur sur l'un des boutons
+$(".btn").on(interact, function(){
 
     // Si c'est au tour du jeu, il ne se passe rien car les clics sont bloqué
     if (gameState.isPlayingSequence) {
