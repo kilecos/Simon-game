@@ -157,6 +157,7 @@ footer a {
   color: var(--cyan);
   text-decoration: none;
   transition: color 0.2s ease;
+  border-radius: 5px;
 }
 
 footer a:hover {
@@ -348,6 +349,17 @@ footer a:hover {
   background-color: var(--green-light);
   box-shadow: 0 5px 0 var(--green-dark);
 }
+
+/* ==========================
+    ACCESSIBILITE
+  =========================== */
+
+/* Effet qui s'applique sur les boutons et le lien lors de la sélection au clavier */
+button:focus-visible, a:focus-visible {
+	outline: 4px solid var(--gold);
+	outline-offset: 2px
+}
+
 
 /* ==========================
     FORMAT MOBILE
