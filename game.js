@@ -331,7 +331,7 @@ $("#btn-close-top, #btn-close-bottom").on("click", function() {
 });
 
 // Fermeture des fenêtres modales par clic en dehors de celles-ci
-$("#modal-rules, #modal-confirm").on('click', (e) => {
+$("#modal-rules, #modal-confirm").on(interact, (e) => {
     if ($(e.target).is($("#modal-rules"))) {
         $("#modal-rules").fadeOut(200);
     }
