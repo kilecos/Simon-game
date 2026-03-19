@@ -10,8 +10,12 @@ const gameState = {
     bestScore : localStorage.getItem("simonBestScore") || 0  // On défini le meilleur score du joueur s'il y en a un
 };
 
-// Définition de la variable de l'évènement à écouter selon le device
-const interact = "ontouchstart" in window ? "touchend" : "click";
+// "ontouchstart" in window indique que l'on est sur support tactile
+const isMobile = "ontouchstart" in window;
+
+// Définition en constante de l'évènement à écouter selon le device mobile ou desktop
+// Le but est de ne pas écouter "click" sur mobile à cause de son délai de 300ms
+const interact = isMobile ? "touchend" : "click";
 
 // Définition et pré-chargement des différents sons via Howler.js
 // Howler.js gère automatiquement la compatibilité audio cross-plateform (Desktop et mobile)
@@ -29,7 +33,8 @@ function playSound(name) {
     sounds[name].play();
 }
 
-$("#best-score").text("Record : Niveau " + gameState.bestScore);  // On met à jour le texte selon le meilleur score du joueur
+// On met à jour le texte selon le meilleur score du joueur
+$("#best-score").text("Record : Niveau " + gameState.bestScore);  
 
 // On défini une fonction afin de bloquer le focus clavier à l'intérieur des fenêtre modales
 function focusTrap (modalId) {
@@ -82,7 +87,7 @@ $("#btn-yes").on("click", function() {
 });
 
 // Modification du titre si l'utilisateur est sur appareil mobile
-if ('ontouchstart' in window) {                          
+if (isMobile) {                          
     $("#level-title").text("Touche ICI pour Commencer");
 }
 
@@ -152,7 +157,7 @@ $(".btn").on(interact, function(){
 
     // Si le jeu n'a pas encore commencé (Game Over ou première partie)
     if (!gameState.started) {
-        if ('ontouchstart' in window) {
+        if (isMobile) {
             return;
         } else {
             handleStart();  // On lance de le jeu
@@ -210,7 +215,7 @@ function checkAnswer(currentLevel) {
 
         // On défini la durée de blocage (1s) avant de pouvoir relancer le jeu
         setTimeout(function() {
-            if ('ontouchstart' in window) {
+            if (isMobile) {
                 $("#level-title").text("Game Over ! Touche ICI pour Relancer");    // On affiche le message indiquant que le joueur peut relancer une partie
         } else {
                 $("#level-title").text("Game Over ! Appuie sur une touche pour Relancer");    
