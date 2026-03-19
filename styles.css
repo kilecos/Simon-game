@@ -180,7 +180,7 @@ footer a:hover {
   background-color: rgba(0, 0, 0, 0.85);
   z-index: 1000;
 /* Important pour centrer la boite au milieu de l'écran */
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
 }
